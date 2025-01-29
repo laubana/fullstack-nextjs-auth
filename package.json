@@ -1,11 +1,11 @@
 {
-  "name": "nextjs-course",
+  "name": "fullstack-nextjs-auth",
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "start": "next start",
     "dev": "next dev",
-    "build": "next build",
-    "start": "next start"
+    "build": "next build"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
