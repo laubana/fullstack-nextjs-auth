@@ -1,9 +1,8 @@
 import { getServerSession } from "next-auth";
 
-import { authOptions } from "../../../../configs/authOptions";
-import { connect } from "../../../../configs/db";
-
-import { hash, verify } from "../../../../helpers/auth";
+import { authOptions } from "@configs/authOptions";
+import { connect } from "@configs/db";
+import { hash, verify } from "@helpers/auth";
 
 const handler = async (req, res) => {
   try {

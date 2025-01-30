@@ -60,7 +60,7 @@ export default () => {
 
   return (
     <section className={styles.auth}>
-      <h1>{isLogin ? "Login" : "Sign Up"}</h1>
+      <h1>{isLogin ? "Sign In" : "Sign Up"}</h1>
       <form onSubmit={handleSubmit}>
         <div className={styles.control}>
           <label htmlFor="email">Your Email</label>
@@ -71,7 +71,7 @@ export default () => {
           <input name="password" type="password" id="password" />
         </div>
         <div className={styles.actions}>
-          <button>{isLogin ? "Login" : "Create Account"}</button>
+          <button>{isLogin ? "Sign In" : "Sign Up"}</button>
           <button
             type="button"
             className={styles.toggle}

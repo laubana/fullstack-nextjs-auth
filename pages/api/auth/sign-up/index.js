@@ -1,6 +1,5 @@
-import { connect } from "../../../../configs/db";
-
-import { hash } from "../../../../helpers/auth";
+import { connect } from "@configs/db";
+import { hash } from "@helpers/auth";
 
 const handler = async (req, res) => {
   try {

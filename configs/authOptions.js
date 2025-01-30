@@ -2,7 +2,7 @@ import CredentialsProvider from "next-auth/providers/credentials";
 
 import { connect } from "./db";
 
-import { verify } from "../helpers/auth";
+import { verify } from "@helpers/auth";
 
 export const authOptions = {
   providers: [

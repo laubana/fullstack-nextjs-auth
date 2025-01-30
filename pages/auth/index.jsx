@@ -2,7 +2,7 @@ import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
 import { useEffect } from "react";
 
-import AuthForm from "../../components/AuthForm";
+import AuthForm from "@components/AuthForm";
 
 export default () => {
   const { data, status } = useSession();

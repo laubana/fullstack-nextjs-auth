@@ -3,9 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "build": "next build",
     "start": "next start",
-    "dev": "next dev",
-    "build": "next build"
+    "dev": "next dev"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",

@@ -1,8 +1,8 @@
-import { useSession } from "next-auth/react";
-
-import UserProfile from "../../components/UserProfile";
-import { useEffect } from "react";
 import { useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
+import { useEffect } from "react";
+
+import ProfileForm from "@components/ProfileForm";
 
 export default () => {
   const { data, status } = useSession();
@@ -17,7 +17,7 @@ export default () => {
   return (
     <>
       {status === "loading" || (status !== "loading" && !data) ? null : (
-        <UserProfile />
+        <ProfileForm />
       )}
     </>
   );
