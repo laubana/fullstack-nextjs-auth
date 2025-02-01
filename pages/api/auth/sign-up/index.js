@@ -13,7 +13,6 @@ const handler = async (req, res) => {
       }
 
       const client = await connect();
-
       const db = client.db();
 
       const existingUser = await db.collection("users").findOne({ email });

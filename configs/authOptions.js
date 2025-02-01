@@ -9,7 +9,6 @@ export const authOptions = {
     CredentialsProvider({
       authorize: async (credentials) => {
         const client = await connect();
-
         const db = client.db();
 
         const existingUser = await db

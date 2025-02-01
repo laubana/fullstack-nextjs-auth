@@ -22,11 +22,10 @@ const handler = async (req, res) => {
         return;
       }
 
-      const existingEmail = session.user.email;
-
       const client = await connect();
-
       const db = client.db();
+
+      const existingEmail = session.user.email;
 
       const existingUser = await db.collection("users").findOne({
         email: existingEmail,
