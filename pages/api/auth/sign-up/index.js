@@ -1,5 +1,5 @@
-import { connect } from "@configs/db";
-import { hash } from "@helpers/auth";
+import dbConfig from "@configs/dbConfig";
+import { hashPassword } from "@helpers/password";
 
 const handler = async (req, res) => {
   try {
@@ -12,7 +12,7 @@ const handler = async (req, res) => {
         return;
       }
 
-      const client = await connect();
+      const client = await dbConfig.connect();
       const db = client.db();
 
       const existingUser = await db.collection("users").findOne({ email });
@@ -25,7 +25,7 @@ const handler = async (req, res) => {
 
       const newUser = await db
         .collection("users")
-        .insertOne({ email, password: hash(password) });
+        .insertOne({ email, password: hashPassword(password) });
 
       res
         .status(201)

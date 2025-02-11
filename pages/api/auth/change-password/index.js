@@ -1,16 +1,16 @@
 import { getServerSession } from "next-auth";
 
-import { authOptions } from "@configs/authOptions";
-import { connect } from "@configs/db";
-import { hash, verify } from "@helpers/auth";
+import authConfig from "@configs/authConfig";
+import dbConfig from "@configs/dbConfig";
+import { hashPassword, verifyPassword } from "@helpers/password";
 
 const handler = async (req, res) => {
   try {
     if (req.method === "PATCH") {
-      const { newPassword, oldPassword } = req.body;
-      const session = await getServerSession(req, res, authOptions);
+      const { oldPassword, newPassword } = req.body;
+      const session = await getServerSession(req, res, authConfig.authOptions);
 
-      if (!newPassword || !oldPassword) {
+      if (!oldPassword || !newPassword) {
         res.status(400).json({ message: "Invalid Input" });
 
         return;
@@ -22,7 +22,7 @@ const handler = async (req, res) => {
         return;
       }
 
-      const client = await connect();
+      const client = await dbConfig.connect();
       const db = client.db();
 
       const existingEmail = session.user.email;
@@ -31,7 +31,7 @@ const handler = async (req, res) => {
         email: existingEmail,
       });
 
-      const isVerified = verify(oldPassword, existingUser.password);
+      const isVerified = verifyPassword(oldPassword, existingUser.password);
 
       if (!isVerified) {
         res.status(403).json({ message: "Forbidden" });
@@ -41,7 +41,7 @@ const handler = async (req, res) => {
         .collection("users")
         .updateOne(
           { email: existingEmail },
-          { $set: { password: hash(newPassword) } }
+          { $set: { password: hashPassword(newPassword) } }
         );
 
       res

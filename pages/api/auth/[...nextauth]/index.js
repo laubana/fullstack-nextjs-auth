@@ -1,5 +1,5 @@
 import NextAuth from "next-auth";
 
-import { authOptions } from "@configs/authOptions";
+import authConfig from "@configs/authConfig";
 
-export default NextAuth(authOptions);
+export default NextAuth(authConfig.authOptions);

@@ -1,14 +1,14 @@
 import CredentialsProvider from "next-auth/providers/credentials";
 
-import { connect } from "./db";
+import dbConfig from "./dbConfig";
 
-import { verify } from "@helpers/auth";
+import { verifyPassword } from "@helpers/password";
 
-export const authOptions = {
+const authOptions = {
   providers: [
     CredentialsProvider({
       authorize: async (credentials) => {
-        const client = await connect();
+        const client = await dbConfig.connect();
         const db = client.db();
 
         const existingUser = await db
@@ -19,7 +19,10 @@ export const authOptions = {
           return null;
         }
 
-        const isVerified = verify(credentials.password, existingUser.password);
+        const isVerified = verifyPassword(
+          credentials.password,
+          existingUser.password
+        );
 
         if (!isVerified) {
           return null;
@@ -62,3 +65,5 @@ export const authOptions = {
   //     },
   //   },
 };
+
+export default { authOptions };

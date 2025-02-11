@@ -9,13 +9,12 @@ export default () => {
     event.preventDefault();
 
     const formData = new FormData(event.target);
-
-    const newPassword = formData.get("newPassword");
     const oldPassword = formData.get("oldPassword");
+    const newPassword = formData.get("newPassword");
 
     try {
       const response = await fetch("/api/auth/change-password", {
-        body: JSON.stringify({ newPassword, oldPassword }),
+        body: JSON.stringify({ oldPassword, newPassword }),
         headers: { "Content-Type": "application/json" },
         method: "PATCH",
       });
@@ -37,12 +36,12 @@ export default () => {
       <h1>Your User Profile</h1>
       <form className={styles.form} onSubmit={handleSubmit}>
         <div className={styles.control}>
-          <label htmlFor="new-password">New Password</label>
-          <input name="newPassword" type="password" id="new-password" />
-        </div>
-        <div className={styles.control}>
           <label htmlFor="old-password">Old Password</label>
           <input name="oldPassword" type="password" id="old-password" />
+        </div>
+        <div className={styles.control}>
+          <label htmlFor="new-password">New Password</label>
+          <input name="newPassword" type="password" id="new-password" />
         </div>
         <div className={styles.action}>
           <button>Change Password</button>
